@@ -6,40 +6,83 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>967</width>
-    <height>738</height>
+    <width>851</width>
+    <height>786</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
+    <property name="spacing">
+     <number>-1</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QWidget" name="widget_main" native="true">
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0" rowspan="2">
+       <property name="leftMargin">
+        <number>9</number>
+       </property>
+       <property name="topMargin">
+        <number>9</number>
+       </property>
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
+       <property name="bottomMargin">
+        <number>9</number>
+       </property>
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item row="0" column="0">
         <widget class="QWidget" name="widget_dataselection" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
-           <width>250</width>
-           <height>300</height>
+           <width>300</width>
+           <height>200</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
            <number>8</number>
           </property>
-          <item row="2" column="1" colspan="2">
-           <widget class="QLineEdit" name="wdg_datasel_lineEdit_filepath"/>
-          </item>
-          <item row="4" column="0" colspan="3">
-           <widget class="QComboBox" name="wdg_datasel_comboBox_sensortype"/>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="wdg_datasel_label_min">
+          <item row="2" column="0">
+           <widget class="QPushButton" name="wdg_datasel_bt_OpenFile">
             <property name="text">
-             <string>Minimum</string>
+             <string>Open</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="3">
+           <widget class="QLabel" name="wdg_datasel_label_sensortype">
+            <property name="text">
+             <string>Select sesnor type</string>
             </property>
            </widget>
           </item>
@@ -57,55 +100,8 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="2">
-           <widget class="QLineEdit" name="wdg_datasel_lineEdit_alertthreashold">
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QPushButton" name="wdg_datasel_bt_OpenFile">
-            <property name="text">
-             <string>Open</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="3">
-           <widget class="QLabel" name="wdg_datasel_label_sensortype">
-            <property name="text">
-             <string>Select sesnor type</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="2">
-           <widget class="QLineEdit" name="wdg_datasel_lineEdit_max">
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="2">
-           <widget class="QLineEdit" name="wdg_datasel_lineEdit_min">
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
+          <item row="2" column="1" colspan="2">
+           <widget class="QLineEdit" name="wdg_datasel_lineEdit_filepath"/>
           </item>
           <item row="0" column="0" colspan="3">
            <widget class="QCheckBox" name="wdg_datasel_checkBox_randomdata">
@@ -118,13 +114,6 @@
            <widget class="QLabel" name="wdg_datasel_label_numberofreadings">
             <property name="text">
              <string>Number of readings </string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="3">
-           <widget class="QLabel" name="wdg_datasel_label_selectsensor">
-            <property name="text">
-             <string>Select sensor file</string>
             </property>
            </widget>
           </item>
@@ -150,6 +139,59 @@
             </property>
            </widget>
           </item>
+          <item row="8" column="2">
+           <widget class="QLineEdit" name="wdg_datasel_lineEdit_alertthreashold">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <widget class="QLineEdit" name="wdg_datasel_lineEdit_max">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QLabel" name="wdg_datasel_label_selectsensor">
+            <property name="text">
+             <string>Select sensor file</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <widget class="QComboBox" name="wdg_datasel_comboBox_sensortype"/>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="wdg_datasel_label_min">
+            <property name="text">
+             <string>Minimum</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QLineEdit" name="wdg_datasel_lineEdit_min">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
           <item row="9" column="0">
            <spacer name="wdg_datasel_verticalSpacer">
             <property name="orientation">
@@ -167,155 +209,93 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QWidget" name="widget_calculatedreadings" native="true">
+        <widget class="QWidget" name="widget_histogram" native="true">
          <property name="minimumSize">
           <size>
-           <width>500</width>
-           <height>170</height>
+           <width>250</width>
+           <height>250</height>
           </size>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="1">
-           <widget class="QWidget" name="widget_stddeviation" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>50</height>
-             </size>
+         <property name="styleSheet">
+          <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_showhistogram">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>200</height>
-             </size>
+            <property name="text">
+             <string>TextLabel</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <item>
-              <widget class="QLabel" name="label_stddeviation">
-               <property name="font">
-                <font>
-                 <pointsize>15</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Standard deviation</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_int_stddeviation">
-               <property name="font">
-                <font>
-                 <pointsize>25</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>403</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QWidget" name="widget_numreadings" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>200</height>
-             </size>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <item>
-              <widget class="QLabel" name="label_readings">
-               <property name="font">
-                <font>
-                 <pointsize>15</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Readings</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_int_numreadings">
-               <property name="font">
-                <font>
-                 <pointsize>25</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>403</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QWidget" name="widget_max" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>200</width>
-              <height>200</height>
-             </size>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QLabel" name="label_max">
-               <property name="font">
-                <font>
-                 <pointsize>15</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>Maximum</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_int_max">
-               <property name="font">
-                <font>
-                 <pointsize>25</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>403</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="1">
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QWidget" name="widget_calculatedreadings" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0" columnstretch="0,0,0" rowminimumheight="0,0,0,0,0" columnminimumwidth="0,0,0">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetNoConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>7</number>
+          </property>
+          <property name="spacing">
+           <number>9</number>
+          </property>
+          <item row="2" column="1">
            <widget class="QWidget" name="widget_mean" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>150</width>
-              <height>50</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>200</width>
-              <height>200</height>
+              <width>16777215</width>
+              <height>16777215</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_mean">
                <property name="font">
@@ -343,21 +323,93 @@
             </layout>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QWidget" name="widget_min" native="true">
+          <item row="4" column="0">
+           <widget class="QWidget" name="widget_numreadings" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>150</width>
-              <height>50</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>200</width>
-              <height>200</height>
+              <width>16777215</width>
+              <height>16777215</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_readings">
+               <property name="font">
+                <font>
+                 <pointsize>15</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Readings</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_int_numreadings">
+               <property name="font">
+                <font>
+                 <pointsize>25</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>403</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QWidget" name="widget_min" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+            </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_min">
                <property name="font">
@@ -385,21 +437,96 @@
             </layout>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QWidget" name="widget_abovethreshold" native="true">
+          <item row="4" column="1">
+           <widget class="QWidget" name="widget_stddeviation" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>150</width>
-              <height>50</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>200</width>
-              <height>200</height>
+              <width>16777215</width>
+              <height>16777215</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_stddeviation">
+               <property name="font">
+                <font>
+                 <pointsize>15</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Standard deviation</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_int_stddeviation">
+               <property name="font">
+                <font>
+                 <pointsize>25</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>403</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QWidget" name="widget_abovethreshold" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+            </property>
             <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>12</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_abovethreshold">
                <property name="font">
@@ -427,42 +554,79 @@
             </layout>
            </widget>
           </item>
-          <item row="2" column="1">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item row="2" column="0">
+           <widget class="QWidget" name="widget_max" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
-              <height>10</height>
+              <width>0</width>
+              <height>0</height>
              </size>
             </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="1" rowspan="2">
-        <widget class="QWidget" name="widget_histogram" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>250</width>
-           <height>250</height>
-          </size>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_showplot">
-            <property name="text">
-             <string>TextLabel</string>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="sizeConstraint">
+              <enum>QLayout::SetDefaultConstraint</enum>
+             </property>
+             <property name="leftMargin">
+              <number>12</number>
+             </property>
+             <property name="topMargin">
+              <number>12</number>
+             </property>
+             <property name="bottomMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_max">
+               <property name="font">
+                <font>
+                 <pointsize>15</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Maximum</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_int_max">
+               <property name="font">
+                <font>
+                 <pointsize>25</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>403</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0" colspan="2">
         <widget class="QWidget" name="widget_plot" native="true">
          <property name="minimumSize">
           <size>
@@ -470,9 +634,27 @@
            <height>250</height>
           </size>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="styleSheet">
+          <string notr="true">QWidget{
+        border-radius: 10px;
+        background-color: rgb(46, 49, 70);
+    }</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QLabel" name="label_showhistogram">
+           <widget class="QLabel" name="label_showplot">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>200</height>
+             </size>
+            </property>
             <property name="text">
              <string>TextLabel</string>
             </property>
