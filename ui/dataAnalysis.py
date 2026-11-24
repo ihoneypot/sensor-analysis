@@ -1,10 +1,15 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QFileDialog
+from PyQt6.QtCore import QRegularExpression
+
 import os
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 ICO_FOLDER = f'{ROOT_PATH}/imgs/folder3.ico'
 DOWNROW = f'{ROOT_PATH}/imgs/downrow.png'
+RUN = f'{ROOT_PATH}/imgs/report.ico'
+SAVE = f'{ROOT_PATH}/imgs/save.ico'
+CLEAR = f'{ROOT_PATH}/imgs/clear.ico'
 
 CUSTOM_WIDGET = ( 
     "QWidget{"
@@ -12,81 +17,6 @@ CUSTOM_WIDGET = (
         "background-color: rgb(46, 49, 70);"
     "}"
 )
-
-CUSTOM_LINEEDIT = (
-    "QLineEdit {\n"
-    "    background-color: rgb(112, 112, 112);\n"
-    "    color: rgb(236, 236, 236);\n"
-    "    border: none;\n"
-    "    border-radius: 10px;\n"
-    "    padding: 4px 4px;\n"
-    "    height: 30px;\n"
-    "}\n"
-    "QLineEdit:focus {\n"
-    "    border-radius: 10px;\n"
-    "}\n"
-)
-
-CUSTOM_COMBOBOX = (
-    "QComboBox {"
-        "background-color: rgb(112, 112, 112);"
-        "color: rgb(236, 236, 236);"
-        "border: none;"
-        "border-radius: 10px;"
-        "min-height: 30px;"
-        "padding-left: 10px;"
-    "}"
-
-    "QComboBox::drop-down {"
-        "border: none;"
-        "border-radius: 10px;"
-    "}"
-
-    "QComboBox QAbstractItemView {"
-        "background-color: rgb(46, 49, 70);"
-        "color: rgb(236, 236, 236);"
-        "border: 1px solid rgb(88, 88, 88);"
-        "border-radius: 10px;"
-        "selection-background-color: rgb(88, 88, 88);"
-        "outline: none;"
-    "}"
-
-    "QComboBox::down-arrow {"
-        f"image: url({DOWNROW});"
-        "width: 12px;"
-        "height: 12px;"
-        "margin-right: 15px;"
-    "}"
-)
-
-# self.set_label_stylesheet() = (
-#     "background-color: rgba(255, 255, 255, 0);"
-#     "color: rgb(236, 236, 236);"
-# )
-
-# CUSTOM_PADD_LABEL = (
-#     "background-color: rgba(255, 255, 255, 0);"
-#     "color: rgb(236, 236, 236);"
-#     "padding-left: 30px;"
-#     "font-size: 15pt;"
-# )
-
-CUSTOM_PBUTTON = (
-    "QPushButton{\n"
-        f"qproperty-icon: url({ICO_FOLDER});"
-        "qproperty-iconSize: 28px;"
-        # "background-color: rgb(112, 112, 112);\n"
-        # "border-radius: 10px;\n"
-        # "color: rgb(236, 236, 236);\n"
-    "}\n"
-    "QPushButton:hover{\n"
-    "    background-color: rgb(88, 88, 88);\n"
-    "}\n"
-    "QPushButton:pressed{\n"
-        "background-color: rgb(120, 120, 120);\n"
-    "}"
-)
-
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -100,10 +30,110 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             f"padding-left: {padding_left}px;"
             f"font-size: {font_size}pt;"
         )
+
         return clabel
+    
+    def custom_lineedit_stylesheet(self, background_color_rgb=(112, 112, 112)):
+        clineedit = (
+            "QLineEdit {"
+                f"background-color: rgb{background_color_rgb};"
+                "color: rgb(236, 236, 236);"
+                "border: none;"
+                "border-radius: 10px;"
+                "padding: 4px 4px;"
+                "height: 30px;"
+            "}"
+            "QLineEdit:focus {"
+            "border-radius: 10px;"
+            "}"
+        )
+        
+        return clineedit
+    
+    def custom_combobox_stylesheet(self, background_color_rgb=(112, 112, 112)):
+        ccombobox = (
+            "QComboBox {"
+                f"background-color: rgb{background_color_rgb};"
+                "color: rgb(236, 236, 236);"
+                "border: none;"
+                "border-radius: 10px;"
+                "min-height: 30px;"
+                "padding-left: 10px;"
+            "}"
+
+            "QComboBox::drop-down {"
+                "border: none;"
+                "border-radius: 10px;"
+            "}"
+
+            "QComboBox QAbstractItemView {"
+                "background-color: rgb(46, 49, 70);"
+                "color: rgb(236, 236, 236);"
+                "border: 1px solid rgb(88, 88, 88);"
+                "border-radius: 10px;"
+                "selection-background-color: rgb(88, 88, 88);"
+                "outline: none;"
+            "}"
+
+            "QComboBox::down-arrow {"
+                f"image: url({DOWNROW});"
+                "width: 12px;"
+                "height: 12px;"
+                "margin-right: 15px;"
+            "}"
+        )
+        return ccombobox
+    
+    def custom_pbutton_stylesheet(self, icon):
+        cpbutton = (
+            "QPushButton{\n"
+                f"qproperty-icon: url({icon});"
+                "qproperty-iconSize: 28px;"
+                "background-color: rgb(112, 112, 112);\n"
+                "border-radius: 10px;\n"
+                "color: rgb(236, 236, 236);\n"
+            "}\n"
+            "QPushButton:hover{\n"
+            "    background-color: rgb(88, 88, 88);\n"
+            "}\n"
+            "QPushButton:pressed{\n"
+                "background-color: rgb(120, 120, 120);\n"
+            "}"
+        )
+        return cpbutton
+
+    def on_checkbox_checked(self):
+        if self.wdg_datasel_checkBox_randomdata.isChecked():
+            self.wdg_datasel_lineEdit_filepath.setEnabled(False)
+            self.wdg_datasel_lineEdit_filepath.setStyleSheet(self.custom_lineedit_stylesheet(background_color_rgb=(80, 80, 80)))
+            self.wdg_datasel_bt_OpenFile.setEnabled(False)
+            self.wdg_datasel_comboBox_sensortype.setEnabled(True)
+            self.wdg_datasel_comboBox_sensortype.setStyleSheet(self.custom_combobox_stylesheet())
+            self.wdg_datasel_lineEdit_max.setEnabled(True)
+            self.wdg_datasel_lineEdit_max.setStyleSheet(self.custom_lineedit_stylesheet())
+            self.wdg_datasel_lineEdit_min.setEnabled(True)
+            self.wdg_datasel_lineEdit_min.setStyleSheet(self.custom_lineedit_stylesheet())
+        else:
+            self.wdg_datasel_lineEdit_filepath.setEnabled(True)
+            self.wdg_datasel_lineEdit_filepath.setStyleSheet(self.custom_lineedit_stylesheet())
+            self.wdg_datasel_bt_OpenFile.setEnabled(True)
+            self.wdg_datasel_comboBox_sensortype.setEnabled(False)
+            self.wdg_datasel_comboBox_sensortype.setStyleSheet(self.custom_combobox_stylesheet(background_color_rgb=(80, 80, 80)))
+            self.wdg_datasel_lineEdit_max.setEnabled(False)
+            self.wdg_datasel_lineEdit_max.setStyleSheet(self.custom_lineedit_stylesheet(background_color_rgb=(80, 80, 80)))
+            self.wdg_datasel_lineEdit_min.setEnabled(False)
+            self.wdg_datasel_lineEdit_min.setStyleSheet(self.custom_lineedit_stylesheet(background_color_rgb=(80, 80, 80)))
+    
+    def show_error(self, title, error):
+        msg = QtWidgets.QMessageBox(self)
+        msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+        msg.setWindowTitle("Warning")
+        msg.setText(title)
+        msg.setInformativeText(str(error))
+        msg.exec()
 
     def setupUi(self):
-        self.setFixedSize(820, 1000)
+        self.resize(820, 900)
         self.setWindowTitle("Data Analysis Tool")
 
         self.centralwidget = QtWidgets.QWidget(self)
@@ -117,13 +147,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout_3.setSpacing(9)
         
         self.widget_dataselection = QtWidgets.QWidget(self.widget_main)
-        self.widget_dataselection.setFixedSize(400, 320)
+        self.widget_dataselection.setFixedSize(400, 390)
         self.widget_dataselection.setStyleSheet(CUSTOM_WIDGET)
         self.gridLayout = QtWidgets.QGridLayout(self.widget_dataselection)
         self.gridLayout.setContentsMargins(8, -1, -1, -1)
 
         self.wdg_datasel_checkBox_randomdata = QtWidgets.QCheckBox(self.widget_dataselection)
         self.wdg_datasel_checkBox_randomdata.setText('Random data')
+        self.wdg_datasel_checkBox_randomdata.toggled.connect(self.on_checkbox_checked)
         self.gridLayout.addWidget(self.wdg_datasel_checkBox_randomdata, 0, 0, 1, 3)
 
         self.wdg_datasel_label_selectsensor = QtWidgets.QLabel(self.widget_dataselection)
@@ -132,15 +163,15 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.wdg_datasel_label_selectsensor, 1, 0, 1, 3)
         
         self.wdg_datasel_bt_OpenFile = QtWidgets.QPushButton(self.widget_dataselection)
-        self.wdg_datasel_bt_OpenFile.setStyleSheet(CUSTOM_PBUTTON)
+        self.wdg_datasel_bt_OpenFile.setStyleSheet(self.custom_pbutton_stylesheet(ICO_FOLDER))
         self.wdg_datasel_bt_OpenFile.setText('Open')
-        self.wdg_datasel_bt_OpenFile.clicked.connect(self.on_open_file)
-        self.wdg_datasel_bt_OpenFile.setFixedSize(80, 30)
+        self.wdg_datasel_bt_OpenFile.setFixedSize(80, 35)
         self.gridLayout.addWidget(self.wdg_datasel_bt_OpenFile, 2, 0, 1, 1)
 
         self.wdg_datasel_lineEdit_filepath = QtWidgets.QLineEdit(self.widget_dataselection)
-        self.wdg_datasel_lineEdit_filepath.setStyleSheet(CUSTOM_LINEEDIT)
-        self.wdg_datasel_lineEdit_filepath.setFixedHeight(31)
+        self.wdg_datasel_lineEdit_filepath.setStyleSheet(self.custom_lineedit_stylesheet())
+        self.wdg_datasel_lineEdit_filepath.setPlaceholderText("C:\\Users\\")
+        self.wdg_datasel_lineEdit_filepath.setFixedHeight(35)
         self.gridLayout.addWidget(self.wdg_datasel_lineEdit_filepath, 2, 1, 1, 2)
 
         self.wdg_datasel_label_sensortype = QtWidgets.QLabel(self.widget_dataselection)
@@ -150,14 +181,15 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         self.wdg_datasel_comboBox_sensortype = QtWidgets.QComboBox(self.widget_dataselection)
         self.wdg_datasel_comboBox_sensortype.setStyle(QtWidgets.QStyleFactory.create("Fusion"))
-        self.wdg_datasel_comboBox_sensortype.setStyleSheet(CUSTOM_COMBOBOX)
+        self.wdg_datasel_comboBox_sensortype.setStyleSheet(self.custom_combobox_stylesheet(background_color_rgb=(80, 80, 80)))
         self.wdg_datasel_comboBox_sensortype.setMaxVisibleItems(5)
 
         self.wdg_datasel_comboBox_sensortype.addItems([
             "Temp sensor",
-            "Pressure sensor",
+            "Humidity sensor",
             "Energy sensor"
         ])
+        self.wdg_datasel_comboBox_sensortype.setEnabled(False)
         self.gridLayout.addWidget(self.wdg_datasel_comboBox_sensortype, 4, 0, 1, 3)
 
         self.wdg_datasel_label_numberofreadings = QtWidgets.QLabel(self.widget_dataselection)
@@ -166,8 +198,9 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.wdg_datasel_label_numberofreadings, 5, 0, 1, 2)
 
         self.wdg_datasel_lineEdit_numreadings = QtWidgets.QLineEdit(self.widget_dataselection)
-        self.wdg_datasel_lineEdit_numreadings.setStyleSheet(CUSTOM_LINEEDIT)
-        self.wdg_datasel_lineEdit_numreadings.setValidator(QtGui.QIntValidator(1, 9999))
+        self.wdg_datasel_lineEdit_numreadings.setStyleSheet(self.custom_lineedit_stylesheet())
+        self.wdg_datasel_lineEdit_numreadings.setPlaceholderText("100")
+        self.wdg_datasel_lineEdit_numreadings.setValidator(QtGui.QIntValidator(-99999, 99999))
         self.wdg_datasel_lineEdit_numreadings.setMaximumSize(QtCore.QSize(50, 16777215))
         self.gridLayout.addWidget(self.wdg_datasel_lineEdit_numreadings, 5, 2, 1, 1)
 
@@ -177,9 +210,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.wdg_datasel_label_max, 6, 0, 1, 1)
 
         self.wdg_datasel_lineEdit_max = QtWidgets.QLineEdit(self.widget_dataselection)
-        self.wdg_datasel_lineEdit_max.setStyleSheet(CUSTOM_LINEEDIT)
-        self.wdg_datasel_lineEdit_max.setValidator(QtGui.QIntValidator(1, 9999))
+        self.wdg_datasel_lineEdit_max.setStyleSheet(self.custom_lineedit_stylesheet(background_color_rgb=(80, 80, 80)))
+        self.wdg_datasel_lineEdit_max.setPlaceholderText("10.0")
         self.wdg_datasel_lineEdit_max.setMaximumSize(QtCore.QSize(50, 16777215))
+        validator = QtGui.QDoubleValidator(-9999.0, 9999.0, 2)
+        validator.setNotation(QtGui.QDoubleValidator.Notation.StandardNotation)
+        validator.setLocale(QtCore.QLocale(QtCore.QLocale.Language.English))
+        self.wdg_datasel_lineEdit_max.setValidator(validator)
+        self.wdg_datasel_lineEdit_max.setEnabled(False)
         self.gridLayout.addWidget(self.wdg_datasel_lineEdit_max, 6, 2, 1, 1)
 
         self.wdg_datasel_label_min = QtWidgets.QLabel(self.widget_dataselection)
@@ -188,9 +226,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.wdg_datasel_label_min, 7, 0, 1, 1)
 
         self.wdg_datasel_lineEdit_min = QtWidgets.QLineEdit(self.widget_dataselection)
-        self.wdg_datasel_lineEdit_min.setStyleSheet(CUSTOM_LINEEDIT)
-        self.wdg_datasel_lineEdit_min.setValidator(QtGui.QIntValidator(1, 9999))
+        self.wdg_datasel_lineEdit_min.setStyleSheet(self.custom_lineedit_stylesheet(background_color_rgb=(80, 80, 80)))
+        self.wdg_datasel_lineEdit_min.setPlaceholderText("-2.0")
         self.wdg_datasel_lineEdit_min.setMaximumSize(QtCore.QSize(50, 16777215))
+        validator = QtGui.QDoubleValidator(-99999.0, 99999.0, 2)
+        validator.setNotation(QtGui.QDoubleValidator.Notation.StandardNotation)
+        validator.setLocale(QtCore.QLocale(QtCore.QLocale.Language.English))
+        self.wdg_datasel_lineEdit_min.setValidator(validator)
+        self.wdg_datasel_lineEdit_min.setEnabled(False)
         self.gridLayout.addWidget(self.wdg_datasel_lineEdit_min, 7, 2, 1, 1)
 
         self.wdg_datasel_label_alertthreshold = QtWidgets.QLabel(self.widget_dataselection)
@@ -199,38 +242,70 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.wdg_datasel_label_alertthreshold, 8, 0, 1, 2)
 
         self.wdg_datasel_lineEdit_alertthreashold = QtWidgets.QLineEdit(self.widget_dataselection)
-        self.wdg_datasel_lineEdit_alertthreashold.setStyleSheet(CUSTOM_LINEEDIT)
+        self.wdg_datasel_lineEdit_alertthreashold.setStyleSheet(self.custom_lineedit_stylesheet())
+        self.wdg_datasel_lineEdit_alertthreashold.setPlaceholderText("7.0")
         self.wdg_datasel_lineEdit_alertthreashold.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.wdg_datasel_lineEdit_alertthreashold.setValidator(QtGui.QIntValidator(1, 9999))
+        validator = QtGui.QDoubleValidator(-99999.0, 99999.0, 2)
+        validator.setNotation(QtGui.QDoubleValidator.Notation.StandardNotation)
+        validator.setLocale(QtCore.QLocale(QtCore.QLocale.Language.English))
+        self.wdg_datasel_lineEdit_alertthreashold.setValidator(validator)
         self.gridLayout.addWidget(self.wdg_datasel_lineEdit_alertthreashold, 8, 2, 1, 1)
 
-        spacerItem = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem, 9, 0, 1, 1)
+        button_layout = QtWidgets.QHBoxLayout()
+        button_layout.setSpacing(8)
+        
+        self.wdg_datasel_bt_apply = QtWidgets.QPushButton("Run")
+        self.wdg_datasel_bt_apply.setStyleSheet(self.custom_pbutton_stylesheet(RUN))
+        self.wdg_datasel_bt_apply.setFixedHeight(35)
+
+        self.wdg_datasel_bt_save = QtWidgets.QPushButton("Save")
+        self.wdg_datasel_bt_save.setStyleSheet(self.custom_pbutton_stylesheet(SAVE))
+        self.wdg_datasel_bt_save.setFixedHeight(35)
+        
+
+        self.wdg_datasel_bt_clear = QtWidgets.QPushButton("Clear")
+        self.wdg_datasel_bt_clear.setStyleSheet(self.custom_pbutton_stylesheet(CLEAR))
+        self.wdg_datasel_bt_clear.setFixedHeight(35)
+
+        button_layout.addWidget(self.wdg_datasel_bt_apply, 1)
+        button_layout.addWidget(self.wdg_datasel_bt_save, 1)
+        button_layout.addWidget(self.wdg_datasel_bt_clear, 1)
+
+        self.gridLayout.addLayout(button_layout, 10, 0, 1, 3)
         self.gridLayout_3.addWidget(self.widget_dataselection, 0, 0, 1, 1)
 
         #############################################################
         self.widget_histogram = QtWidgets.QWidget(self.widget_main)
-        self.widget_histogram.setFixedSize(390, 320)
+        self.widget_histogram.setFixedSize(390, 390)
         self.widget_histogram.setStyleSheet(CUSTOM_WIDGET)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget_histogram)
+        self.verticalLayout_3.setContentsMargins(0, 2, 0, 0)
+        self.verticalLayout_3.setSpacing(0)
         
         self.label_showhistogram = QtWidgets.QLabel(self.widget_histogram)
-        self.label_showhistogram.setText('label_showhistogram')
+        self.label_showhistogram.setText('Histogram')
+        self.label_showhistogram.setStyleSheet(self.set_label_stylesheet(font_size=25))
+        self.label_showhistogram.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_3.addWidget(self.label_showhistogram)
-        self.gridLayout_3.addWidget(self.widget_histogram, 0, 1, 1, 1)
 
         #############################################################
         self.widget_plot = QtWidgets.QWidget(self.widget_main)
-        self.widget_plot.setMinimumSize(QtCore.QSize(250, 250))
         self.widget_plot.setStyleSheet(CUSTOM_WIDGET)
 
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget_plot)
-        self.label_showplot = QtWidgets.QLabel(self.widget_plot)
-        self.label_showplot.setText('TextLabel')
-        self.verticalLayout_4.addWidget(self.label_showplot)
+        self.verticalLayout_4.setContentsMargins(0, 2, 0, 0)
+        self.verticalLayout_4.setSpacing(0)
         
+        self.label_plot = QtWidgets.QLabel(self.widget_plot)
+        self.label_plot.setText('Plot')
+        self.label_plot.setStyleSheet(self.set_label_stylesheet(font_size=25))
+        self.label_plot.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_4.addWidget(self.label_plot)
+        
+        self.gridLayout_3.addWidget(self.widget_histogram, 0, 1, 1, 1)
         self.gridLayout_3.addWidget(self.widget_plot, 1, 0, 1, 2)
         self.verticalLayout_2.addWidget(self.widget_main)
+        
         self.setCentralWidget(self.centralwidget)
         
         #############################################################
@@ -241,7 +316,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         sizePolicy.setHeightForWidth(self.widget_calculatedreadings.sizePolicy().hasHeightForWidth())
         self.widget_calculatedreadings.setSizePolicy(sizePolicy)
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_calculatedreadings)
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 7)
+        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setSpacing(9)
         self.widget_mean = QtWidgets.QWidget(self.widget_calculatedreadings)
         self.widget_mean.setStyleSheet(CUSTOM_WIDGET)
@@ -344,9 +419,3 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.gridLayout_2.addWidget(self.widget_abovethreshold, 4, 2, 1, 1)
         self.gridLayout_2.addWidget(self.widget_max, 2, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_calculatedreadings, 2, 0, 1, 2)
-        
-
-
-    def on_open_file(self):
-        path_name, _ = QFileDialog.getOpenFileName(None, 'Open working directory', "")
-        self.wdg_datasel_lineEdit_filepath.setText(path_name)
